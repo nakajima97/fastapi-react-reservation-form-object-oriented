@@ -18,3 +18,12 @@ class Reservation():
         self.reservation_date = reservation_date
         self.email_address = email_address
         self.phone_number = phone_number
+
+    def toDict(self):
+        return {
+            'reservation_id': self.reservation_id.value,
+            'name': self.name.value,
+            'reservation_date': self.reservation_date.value,
+            'email_address': self.email_address.value,
+            'phone_number': self.phone_number.value
+        }
