@@ -1,19 +1,35 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-
-from source.db import get_db
-
+from fastapi import APIRouter
 from source.schemas.reservations import Reservation, ResponseReservation, GetReservationResponse
-from source.cruds.reservations import store_reservations, fetch_reservations
-
 
 router = APIRouter()
 
 @router.get("/reservations", response_model=GetReservationResponse)
-async def get_reservations(db: Session = Depends(get_db)):
-  return await fetch_reservations(db)
+async def get_reservations():
+  return {
+      "reservations": [
+          {
+              "id": 1,
+              "date": "2024-04-13",
+              "name": "John Doe",
+              "email_address": "example@example.com",
+              "phone_number": "123-4567-8901",
+          },
+          {
+              "id": 2,
+              "date": "2024-04-30",
+              "name": "Deborah Doe",
+              "email_address": "example@example.com",
+              "phone_number": "123-4567-8901",
+          },
+      ]
+  }
 
 @router.post("/reservations", response_model=ResponseReservation)
-async def create_reservation(reservation: Reservation, db: Session = Depends(get_db)):
-  reservation = await store_reservations(db, reservation)
-  return reservation
+async def create_reservation(reservation: Reservation):
+    return {
+        "id": 1,
+        "date": "2024-04-13",
+        "name": "John Doe",
+        "email_address": "example@example.com",
+        "phone_number": "123-4567-8901",
+    }
