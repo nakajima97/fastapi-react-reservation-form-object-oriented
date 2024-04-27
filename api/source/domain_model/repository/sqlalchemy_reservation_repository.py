@@ -12,8 +12,6 @@ class SqlAlchemyReservationRepository():
 
     async def insert(self, reservation: Reservation) -> ReservationModel:
         model = self.__toModel(reservation)
-        if (model.id == 0):
-            model.id = None
         self.db.add(model)
         await self.db.commit()
         await self.db.refresh(model)
