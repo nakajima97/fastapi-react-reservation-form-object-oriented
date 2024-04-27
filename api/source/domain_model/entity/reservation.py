@@ -7,11 +7,11 @@ from source.domain_model.value_object.phone_number import PhoneNumber
 class Reservation():
     def __init__(
         self,
-        id: ReservationId,
         name: Name,
         reservation_date: ReservationDate,
         email_address: EmailAddress,
-        phone_number: PhoneNumber
+        phone_number: PhoneNumber,
+        id: ReservationId | None = None
     ) -> None:
         self.reservation_id = id
         self.name = name

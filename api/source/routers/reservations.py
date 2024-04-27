@@ -36,11 +36,5 @@ async def create_reservation(reservation_schema: ReservationSchema, db: Session 
 
     reservation = Reservation(id = 0, name = reservation_schema.name, reservation_date = reservation_schema.date, email_address = reservation_schema.email_address, phone_number = reservation_schema.phone_number)
 
-    await storeReservation.execute(reservation)
-    return {
-        "id": 1,
-        "date": "2024-04-13",
-        "name": "John Doe",
-        "email_address": "example@example.com",
-        "phone_number": "123-4567-8901",
-    }
+    result = await storeReservation.execute(reservation)
+    return result
