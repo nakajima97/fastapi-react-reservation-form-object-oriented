@@ -1,4 +1,6 @@
+from typing import List
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import select
 
 from source.models.reservations import Reservations as ReservationModel
 from source.domain_model.entity.reservation import Reservation
@@ -16,3 +18,8 @@ class SqlAlchemyReservationRepository():
         await self.db.commit()
         await self.db.refresh(model)
         return model
+
+    async def fetch(self) -> List[ReservationModel]:
+        result = await self.db.execute(select(ReservationModel))
+        result_all = result.all()
+        return [reservation[0] for reservation in result_all]
