@@ -34,7 +34,7 @@ async def create_reservation(reservation_schema: ReservationSchema, db: Session 
     sqlAlchemyReservationRepository = SqlAlchemyReservationRepository(db)
     storeReservation = StoreReservation(sqlAlchemyReservationRepository)
 
-    reservation = Reservation(id = 0, name = reservation_schema.name, reservation_date = reservation_schema.date, email_address = reservation_schema.email_address, phone_number = reservation_schema.phone_number)
+    reservation = Reservation(name = reservation_schema.name, reservation_date = reservation_schema.date, email_address = reservation_schema.email_address, phone_number = reservation_schema.phone_number)
 
     result = await storeReservation.execute(reservation)
     return result
