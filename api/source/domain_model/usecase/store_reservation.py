@@ -6,4 +6,4 @@ class StoreReservation():
         self.reservation_repository = reservation_repository
 
     async def execute(self, reservation: Reservation):
-        await self.reservation_repository.insert(reservation)
+        return await self.reservation_repository.insert(reservation)
