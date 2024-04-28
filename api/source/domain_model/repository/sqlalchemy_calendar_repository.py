@@ -12,12 +12,10 @@ class SqlAlchemyCalendarRepository():
     def __toModel(self, calendar: Calendar) -> CalendarsModel:
         return CalendarsModel(**calendar.toDict())
 
-    async def insert(self, calendars: List[CalendarsModel]) -> None:
+    async def insert(self, calendars: List[Calendar]) -> None:
+        print(len(calendars))
         for calendar in calendars:
             calendar_model = self.__toModel(calendar)
-
-            result = await self.db.execute(select(CalendarsModel).where(CalendarsModel.date == calendar_model.date))
-            if result.first() is None:
-                self.db.add(calendar_model)
-                await self.db.commit()
-                await self.db.refresh(calendar_model)
+            print(calendar_model.date)
+            self.db.add(calendar_model)
+        await self.db.commit()
