@@ -63,9 +63,14 @@ classDiagram
       +insert(Calendar)
       +fetch_holiday()
     }
+
+    Calendar o-- CalendarId
     class Calendar{
       -CalendarId calendar_id
       -datetime.date date
       -boolean is_holiday
+    }
+    class CalendarId{
+      -int calendar_id
     }
 ```
