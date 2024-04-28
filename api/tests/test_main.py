@@ -9,15 +9,10 @@ import datetime
 
 from source.db import get_db, Base
 from source.main import app
-from source.config import settings
 import source.models.calendars as calendars_model
 import source.models.reservations as reservations_model
 
 ASYNC_DB_URL = "sqlite+aiosqlite:///:memory:"
-
-headers = {
-    'X-API-Key': settings.API_KEY
-}
 
 async_engine = create_async_engine(ASYNC_DB_URL, echo=False)
 async_session = sessionmaker(autocommit=False, autoflush=False, bind=async_engine, class_=AsyncSession)
@@ -94,7 +89,7 @@ async def test_create_holidays(async_client):
     base_json = {
         "holidays": ["2024-01-01", "2024-01-02"]
     }
-    response = await async_client.post("/holidays", json=base_json, headers=headers)
+    response = await async_client.post("/holidays", json=base_json)
     assert response.status_code == starlette.status.HTTP_200_OK
     response_object = response.json()
     assert response_object["holidays"] == base_json["holidays"]
