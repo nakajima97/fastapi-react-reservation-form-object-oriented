@@ -18,20 +18,17 @@ classDiagram
       +fetch()
     }
 
-    Reservation o-- ReservationId
+    Reservation o-- Id
     Reservation o-- ReservationDate
     Reservation o-- Name
     Reservation o-- EmailAddress
     Reservation o-- PhoneNumber
     class Reservation{
-      -ReservationId reservation_id
+      -Id id
       -ReservationDate reservation_date
       -Name name
       -EmailAddress email_address
       -PhoneNumber phone_number
-    }
-    class ReservationId{
-      -int reservation_id
     }
     class ReservationDate{
       -datetime.date reservations_date
@@ -64,13 +61,13 @@ classDiagram
       +fetch_holiday()
     }
 
-    Calendar o-- CalendarId
+    Calendar o-- Id
     class Calendar{
-      -CalendarId calendar_id
+      -Id Id
       -datetime.date date
       -boolean is_holiday
     }
-    class CalendarId{
-      -int calendar_id
+    class Id{
+      -int Id
     }
 ```
