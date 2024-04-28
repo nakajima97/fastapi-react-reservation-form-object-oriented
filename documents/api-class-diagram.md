@@ -1,5 +1,11 @@
 ```mermaid
 classDiagram
+    SqlAlchemyReservationRepository --> Reservation
+    class SqlAlchemyReservationRepository{
+      +insert(Reservation)
+      +fetch()
+    }
+
     Reservation o-- ReservationId
     Reservation o-- ReservationDate
     Reservation o-- Name
