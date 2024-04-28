@@ -22,4 +22,7 @@ class SqlAlchemyReservationRepository():
     async def fetch(self) -> List[ReservationModel]:
         result = await self.db.execute(select(ReservationModel))
         result_all = result.all()
+        # 件数が0件の場合は空リストを返す
+        if len(result_all) == 0:
+            return []
         return [reservation[0] for reservation in result_all]

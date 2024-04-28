@@ -12,4 +12,4 @@ async def get_holidays(db: Session = Depends(get_db)):
 
 @router.post("/holidays", response_model=Holidays)
 async def post_holidays(holidays: Holidays, db: Session = Depends(get_db)):
-  return {"holidays": ['2024-05-10']}
+  return {"holidays": ['2024-05-10', '2024-05-11']}

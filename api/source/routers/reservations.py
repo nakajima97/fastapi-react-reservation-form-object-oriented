@@ -14,9 +14,6 @@ async def get_reservations(db: Session = Depends(get_db)):
     sqlAlchemyReservationRepository = SqlAlchemyReservationRepository(db)
     fetch_reservations = FetchReservations(sqlAlchemyReservationRepository)
     result = await fetch_reservations.execute()
-    print(result)
-    print(type(result[0]))
-    print(dir(result[0]))
     return {"reservations": result}
     return {
         "reservations": [
