@@ -1,5 +1,17 @@
 ```mermaid
 classDiagram
+    StoreReservation --> SqlAlchemyReservationRepository
+    class StoreReservation{
+      -reservation_repository
+      +execute()
+    }
+
+    FetchReservations --> SqlAlchemyReservationRepository
+    class FetchReservations {
+      -reservation_repository
+      +execute()
+    }
+
     SqlAlchemyReservationRepository --> Reservation
     class SqlAlchemyReservationRepository{
       +insert(Reservation)
