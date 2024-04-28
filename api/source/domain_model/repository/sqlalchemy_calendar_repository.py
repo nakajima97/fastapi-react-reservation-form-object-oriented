@@ -16,7 +16,8 @@ class SqlAlchemyCalendarRepository():
         for calendar in calendars:
             calendar_model = self.__toModel(calendar)
 
-            if self.db.execute(select(CalendarsModel).where(CalendarsModel.date == calendar_model.date)).first() is None:
+            result = await self.db.execute(select(CalendarsModel).where(CalendarsModel.date == calendar_model.date))
+            if result.first() is None:
                 self.db.add(calendar_model)
                 await self.db.commit()
                 await self.db.refresh(calendar_model)
