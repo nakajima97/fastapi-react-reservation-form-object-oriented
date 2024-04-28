@@ -18,20 +18,17 @@ classDiagram
       +fetch()
     }
 
-    Reservation o-- ReservationId
+    Reservation o-- Id
     Reservation o-- ReservationDate
     Reservation o-- Name
     Reservation o-- EmailAddress
     Reservation o-- PhoneNumber
     class Reservation{
-      -ReservationId reservation_id
+      -Id id
       -ReservationDate reservation_date
       -Name name
       -EmailAddress email_address
       -PhoneNumber phone_number
-    }
-    class ReservationId{
-      -int reservation_id
     }
     class ReservationDate{
       -datetime.date reservations_date
@@ -44,5 +41,33 @@ classDiagram
     }
     class PhoneNumber{
       -string phone_number
+    }
+
+    AddHoliday --> SqlAlchemyCalendarRepository
+    class AddHoliday{
+      -calendar_repository
+      +execute()
+    }
+
+    FetchHoliday --> SqlAlchemyCalendarRepository
+    class FetchHoliday{
+      -calendar_repository
+      +execute()
+    }
+
+    SqlAlchemyCalendarRepository --> Calendar
+    class SqlAlchemyCalendarRepository{
+      +insert(Calendar)
+      +fetch_holiday()
+    }
+
+    Calendar o-- Id
+    class Calendar{
+      -Id Id
+      -datetime.date date
+      -boolean is_holiday
+    }
+    class Id{
+      -int Id
     }
 ```
