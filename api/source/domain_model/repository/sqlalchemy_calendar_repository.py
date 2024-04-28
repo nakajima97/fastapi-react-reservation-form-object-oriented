@@ -5,7 +5,7 @@ from sqlalchemy.sql import select
 from source.models.calendars import Calendars as CalendarsModel
 from source.domain_model.entity.calendar import Calendar
 
-class SqlAlchemyReservationRepository():
+class SqlAlchemyCalendarRepository():
     def __init__(self, db: Session) -> None:
         self.db = db
 
