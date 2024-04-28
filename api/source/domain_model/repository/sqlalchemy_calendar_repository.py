@@ -2,7 +2,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import select
 
-from source.models.calendars import CalendarsModel
+from source.models.calendars import Calendars as CalendarsModel
 from source.domain_model.entity.calendar import Calendar
 
 class SqlAlchemyReservationRepository():
@@ -10,7 +10,7 @@ class SqlAlchemyReservationRepository():
         self.db = db
 
     def __toModel(self, calendar: Calendar) -> CalendarsModel:
-    return CalendarsModel(**calendar.toDict())
+        return CalendarsModel(**calendar.toDict())
 
     async def insert(self, calendars: List[CalendarsModel]) -> None:
         for calendar in calendars:
