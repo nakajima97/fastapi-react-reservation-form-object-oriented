@@ -45,4 +45,27 @@ classDiagram
     class PhoneNumber{
       -string phone_number
     }
+
+    AddHoliday --> SqlAlchemyCalendarRepository
+    class AddHoliday{
+      -calendar_repository
+      +execute()
+    }
+
+    FetchHoliday --> SqlAlchemyCalendarRepository
+    class FetchHoliday{
+      -calendar_repository
+      +execute()
+    }
+
+    SqlAlchemyCalendarRepository --> Calendar
+    class SqlAlchemyCalendarRepository{
+      +insert(Calendar)
+      +fetch_holiday()
+    }
+    class Calendar{
+      -CalendarId calendar_id
+      -datetime.date date
+      -boolean is_holiday
+    }
 ```
