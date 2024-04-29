@@ -6,12 +6,18 @@ from source.schemas.holidays import Holidays
 from source.domain_model.repository.sqlalchemy_calendar_repository import SqlAlchemyCalendarRepository
 from source.domain_model.entity.calendar import Calendar
 from source.domain_model.usecase.store_holidays import StoreHolidays
+from source.domain_model.usecase.fetch_holidays import FetchHolidays
 
 router = APIRouter()
 
 @router.get("/holidays", response_model=Holidays)
 async def get_holidays(db: Session = Depends(get_db)):
-  return {"holidays": ['2024-05-10', '2024-05-11']}
+  calendar_repository = SqlAlchemyCalendarRepository(db)
+  fetch_holidays = FetchHolidays(calendar_repository)
+
+  holidays = await fetch_holidays.execute()
+
+  return {"holidays": holidays}
 
 @router.post("/holidays", response_model=Holidays)
 async def post_holidays(holidays: Holidays, db: Session = Depends(get_db)):

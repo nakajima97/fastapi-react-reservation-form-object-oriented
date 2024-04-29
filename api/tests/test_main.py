@@ -99,8 +99,7 @@ async def test_get_holidays_no_data(async_client):
     response = await async_client.get("/holidays")
     assert response.status_code == starlette.status.HTTP_200_OK
     response_object = response.json()
-    # mockでは動作しないテストコードなのでコメントアウト
-    # assert response_object["holidays"] == []
+    assert response_object["holidays"] == []
 
 @pytest.mark.asyncio
 async def test_get_holidays_with_data(async_client):
