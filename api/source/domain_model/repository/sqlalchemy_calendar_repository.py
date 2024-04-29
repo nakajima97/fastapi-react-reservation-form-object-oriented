@@ -13,9 +13,11 @@ class SqlAlchemyCalendarRepository():
         return CalendarsModel(**calendar.toDict())
 
     async def insert(self, calendars: List[Calendar]) -> None:
-        print(len(calendars))
         for calendar in calendars:
+            result = await self.db.execute(select(CalendarsModel).filter(CalendarsModel.date == calendar.date))
+            if result.scalar() is not None:
+                continue
+
             calendar_model = self.__toModel(calendar)
-            print(calendar_model.date)
             self.db.add(calendar_model)
         await self.db.commit()
