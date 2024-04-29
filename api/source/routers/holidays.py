@@ -5,8 +5,8 @@ from source.db import get_db
 from source.schemas.holidays import Holidays
 from source.domain_model.repository.sqlalchemy_calendar_repository import SqlAlchemyCalendarRepository
 from source.domain_model.entity.calendar import Calendar
-from source.domain_model.usecase.store_holidays import StoreHolidays
-from source.domain_model.usecase.fetch_holidays import FetchHolidays
+from source.domain_model.usecase.holiday.store_holidays import StoreHolidays
+from source.domain_model.usecase.holiday.fetch_holidays import FetchHolidays
 
 router = APIRouter()
 
