@@ -22,4 +22,5 @@ async def post_holidays(holidays: Holidays, db: Session = Depends(get_db)):
     calendar = Calendar(date=holiday, is_holiday=True)
     calendars.append(calendar)
   await store_holidays.execute(calendars)
-  return {"holidays": ['2024-05-10', '2024-05-11']}
+  print(calendars)
+  return holidays
