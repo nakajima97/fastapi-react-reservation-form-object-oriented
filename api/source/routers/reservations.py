@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from source.db import get_db
 from source.schemas.reservations import Reservation as ReservationSchema, ResponseReservation, GetReservationResponse
-from source.domain_model.usecase.store_reservation import StoreReservation
-from source.domain_model.usecase.fetch_reservations import FetchReservations
+from source.domain_model.usecase.reservation.store_reservation import StoreReservation
+from source.domain_model.usecase.reservation.fetch_reservations import FetchReservations
 from source.domain_model.repository.sqlalchemy_reservation_repository import SqlAlchemyReservationRepository
 from source.domain_model.entity.reservation import Reservation
 
