@@ -12,7 +12,7 @@ erDiagram
 
   calendars {
     bigint id PK
-    date date
+    date date UK
     tinyint is_holiday
     datetime created_at
     datetime updated_at
