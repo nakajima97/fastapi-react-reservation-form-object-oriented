@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 import datetime
 
 class Reservation(BaseModel):
@@ -21,7 +21,7 @@ class Reservation(BaseModel):
     }
 
 class PostReservationRequest(Reservation):
-    @validator("date")
+    @field_validator("date")
     def validate_date(cls, value):
         if value < datetime.date.today():
             raise ValueError("Date must be in the future")

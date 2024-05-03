@@ -35,7 +35,7 @@ async def async_client() -> AsyncClient:
 @pytest.mark.asyncio
 async def test_create_reservation(async_client):
     base_json = {
-        "date": "2024-01-01",
+        "date": datetime.date.today().strftime("%Y-%m-%d"),
         "name": "テスト　ヨヤク",
         "email_address": "example@example.com",
         "phone_number": "123-456-7890"
