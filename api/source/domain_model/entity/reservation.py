@@ -1,6 +1,7 @@
+import datetime
+
 from source.domain_model.value_object.id import Id
 from source.domain_model.value_object.name import Name
-from source.domain_model.value_object.reservation_date import ReservationDate
 from source.domain_model.value_object.email_address import EmailAddress
 from source.domain_model.value_object.phone_number import PhoneNumber
 
@@ -8,7 +9,7 @@ class Reservation():
     def __init__(
         self,
         name: Name,
-        reservation_date: ReservationDate,
+        reservation_date: datetime.date,
         email_address: EmailAddress,
         phone_number: PhoneNumber,
         id: Id | None = None
