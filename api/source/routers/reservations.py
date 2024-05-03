@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from source.db import get_db
-from source.schemas.reservations import Reservation as ReservationSchema, ResponseReservation, GetReservationResponse
+from source.schemas.reservations import PostReservationRequest, ResponseReservation, GetReservationResponse
 from source.domain_model.usecase.reservation.store_reservation import StoreReservation
 from source.domain_model.usecase.reservation.fetch_reservations import FetchReservations
 from source.domain_model.repository.sqlalchemy_reservation_repository import SqlAlchemyReservationRepository
@@ -17,7 +17,7 @@ async def get_reservations(db: Session = Depends(get_db)):
     return {"reservations": result}
 
 @router.post("/reservations", response_model=ResponseReservation)
-async def create_reservation(reservation_schema: ReservationSchema, db: Session = Depends(get_db)):
+async def create_reservation(reservation_schema: PostReservationRequest, db: Session = Depends(get_db)):
     sqlAlchemyReservationRepository = SqlAlchemyReservationRepository(db)
     storeReservation = StoreReservation(sqlAlchemyReservationRepository)
 

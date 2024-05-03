@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 import datetime
 
 class Reservation(BaseModel):
@@ -19,6 +19,13 @@ class Reservation(BaseModel):
             ]
         }
     }
+
+class PostReservationRequest(Reservation):
+    @validator("date")
+    def validate_date(cls, value):
+        if value < datetime.date.today():
+            raise ValueError("Date must be in the future")
+        return value
 
 class ResponseReservation(Reservation):
     id: int = Field(..., title="ID of the reservation")
