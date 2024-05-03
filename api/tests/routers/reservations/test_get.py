@@ -33,38 +33,36 @@ async def async_client() -> AsyncClient:
         yield client
 
 @pytest.mark.asyncio
-async def test_create_holidays(async_client):
-    base_json = {
-        "holidays": ['2024-05-10', '2024-05-11']
-    }
-    response = await async_client.post("/holidays", json=base_json)
+async def test_get_reservations_no_data(async_client):
+    response = await async_client.get("/reservations")
     assert response.status_code == starlette.status.HTTP_200_OK
     response_object = response.json()
-    assert response_object["holidays"] == base_json["holidays"]
+    assert response_object["reservations"] == []
 
 @pytest.mark.asyncio
-async def test_get_holidays_no_data(async_client):
-    response = await async_client.get("/holidays")
-    assert response.status_code == starlette.status.HTTP_200_OK
-    response_object = response.json()
-    assert response_object["holidays"] == []
-
-@pytest.mark.asyncio
-async def test_get_holidays_with_data(async_client):
+async def test_get_reservations_with_data(async_client):
     base_json = {
-        "holidays": ['2024-05-10', '2024-05-11']
+        "date": "2024-01-01",
+        "name": "テスト　ヨヤク",
+        "email_address": "example@example.com",
+        "phone_number": "123-456-7890"
     }
 
     async with async_session() as session:
-        date1 = datetime.datetime.strptime(base_json["holidays"][0], "%Y-%m-%d")
-        date2 = datetime.datetime.strptime(base_json["holidays"][1], "%Y-%m-%d")
-        calendar1 = calendars_model.Calendars(date=date1, is_holiday=True)
-        calendar2 = calendars_model.Calendars(date=date2, is_holiday=True)
-        session.add(calendar1)
-        session.add(calendar2)
+        date = datetime.date(2024, 1, 1)
+        reservation = reservations_model.Reservations(
+            date = datetime.datetime.strptime(base_json["date"], "%Y-%m-%d"),
+            name = base_json["name"],
+            email_address = base_json["email_address"],
+            phone_number = base_json["phone_number"]
+        )
+        session.add(reservation)
         await session.commit()
 
-    response = await async_client.get("/holidays")
+    response = await async_client.get("/reservations")
     assert response.status_code == starlette.status.HTTP_200_OK
     response_object = response.json()
-    assert response_object["holidays"] == base_json["holidays"]
+    assert response_object["reservations"][0]["date"] == base_json["date"]
+    assert response_object["reservations"][0]["name"] == base_json["name"]
+    assert response_object["reservations"][0]["email_address"] == base_json["email_address"]
+    assert response_object["reservations"][0]["phone_number"] == base_json["phone_number"]

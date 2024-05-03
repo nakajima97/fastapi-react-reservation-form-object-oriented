@@ -33,38 +33,30 @@ async def async_client() -> AsyncClient:
         yield client
 
 @pytest.mark.asyncio
-async def test_create_holidays(async_client):
+async def test_create_reservation(async_client):
     base_json = {
-        "holidays": ['2024-05-10', '2024-05-11']
+        "date": datetime.date.today().strftime("%Y-%m-%d"),
+        "name": "テスト　ヨヤク",
+        "email_address": "example@example.com",
+        "phone_number": "123-456-7890"
     }
-    response = await async_client.post("/holidays", json=base_json)
+    response = await async_client.post("/reservations", json=base_json)
     assert response.status_code == starlette.status.HTTP_200_OK
     response_object = response.json()
-    assert response_object["holidays"] == base_json["holidays"]
+    assert response_object["date"] == base_json["date"]
+    assert response_object["name"] == base_json["name"]
+    assert response_object["email_address"] == base_json["email_address"]
+    assert response_object["phone_number"] == base_json["phone_number"]
+    assert response_object["id"] == 1
 
 @pytest.mark.asyncio
-async def test_get_holidays_no_data(async_client):
-    response = await async_client.get("/holidays")
-    assert response.status_code == starlette.status.HTTP_200_OK
-    response_object = response.json()
-    assert response_object["holidays"] == []
-
-@pytest.mark.asyncio
-async def test_get_holidays_with_data(async_client):
+async def test_create_reservation_past_date(async_client):
+    past_date = datetime.date.today() - datetime.timedelta(days=1)
     base_json = {
-        "holidays": ['2024-05-10', '2024-05-11']
+        "date": past_date.strftime("%Y-%m-%d"),
+        "name": "テスト　ヨヤク",
+        "email_address": "example@example.com",
+        "phone_number": "123-456-7890"
     }
-
-    async with async_session() as session:
-        date1 = datetime.datetime.strptime(base_json["holidays"][0], "%Y-%m-%d")
-        date2 = datetime.datetime.strptime(base_json["holidays"][1], "%Y-%m-%d")
-        calendar1 = calendars_model.Calendars(date=date1, is_holiday=True)
-        calendar2 = calendars_model.Calendars(date=date2, is_holiday=True)
-        session.add(calendar1)
-        session.add(calendar2)
-        await session.commit()
-
-    response = await async_client.get("/holidays")
-    assert response.status_code == starlette.status.HTTP_200_OK
-    response_object = response.json()
-    assert response_object["holidays"] == base_json["holidays"]
+    response = await async_client.post("/reservations", json=base_json)
+    assert response.status_code == starlette.status.HTTP_422_UNPROCESSABLE_ENTITY
