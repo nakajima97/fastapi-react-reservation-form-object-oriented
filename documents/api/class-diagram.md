@@ -19,19 +19,15 @@ classDiagram
   }
 
   Reservation o-- Id
-  Reservation o-- ReservationDate
   Reservation o-- Name
   Reservation o-- EmailAddress
   Reservation o-- PhoneNumber
   class Reservation{
     -Id id
-    -ReservationDate reservation_date
+    -datetime.date reservation_date
     -Name name
     -EmailAddress email_address
     -PhoneNumber phone_number
-  }
-  class ReservationDate{
-    -datetime.date reservations_date
   }
   class Name{
     -string name
