@@ -34,7 +34,7 @@ class SqlAlchemyCalendarRepository:
 
     async def fetch_holidays(self) -> List[Calendar]:
         results = await self.db.execute(
-            select(CalendarsModel).where(CalendarsModel.is_holiday == True)
+            select(CalendarsModel).where(CalendarsModel.is_holiday)
         )
 
         holidays = []
