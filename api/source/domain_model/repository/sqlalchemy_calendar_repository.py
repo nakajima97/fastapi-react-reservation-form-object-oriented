@@ -5,7 +5,8 @@ from sqlalchemy.sql import select
 from source.models.calendars import Calendars as CalendarsModel
 from source.domain_model.entity.calendar import Calendar
 
-class SqlAlchemyCalendarRepository():
+
+class SqlAlchemyCalendarRepository:
     def __init__(self, db: Session) -> None:
         self.db = db
 
@@ -16,12 +17,14 @@ class SqlAlchemyCalendarRepository():
         return Calendar(
             id=calendar_model.id,
             date=calendar_model.date,
-            is_holiday=calendar_model.is_holiday
+            is_holiday=calendar_model.is_holiday,
         )
 
     async def insert(self, calendars: List[Calendar]) -> None:
         for calendar in calendars:
-            result = await self.db.execute(select(CalendarsModel).filter(CalendarsModel.date == calendar.date))
+            result = await self.db.execute(
+                select(CalendarsModel).filter(CalendarsModel.date == calendar.date)
+            )
             if result.scalar() is not None:
                 continue
 
@@ -30,10 +33,12 @@ class SqlAlchemyCalendarRepository():
         await self.db.commit()
 
     async def fetch_holidays(self) -> List[Calendar]:
-        results = await self.db.execute(select(CalendarsModel).where(CalendarsModel.is_holiday == True))
+        results = await self.db.execute(
+            select(CalendarsModel).where(CalendarsModel.is_holiday)
+        )
 
         holidays = []
         for row in results.fetchall():
-            holidays.append(self.__model_to_entity(row[0]).date.strftime('%Y-%m-%d'))
+            holidays.append(self.__model_to_entity(row[0]).date.strftime("%Y-%m-%d"))
 
         return holidays
