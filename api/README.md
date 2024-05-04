@@ -6,3 +6,5 @@ https://docs.astral.sh/ruff/
 
 ## Format
 `docker compose exec api poetry run ruff format`  
+dry run  
+`docker compose exec api poetry run ruff format --check`  
