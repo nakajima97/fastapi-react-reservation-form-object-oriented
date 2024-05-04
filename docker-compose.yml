@@ -28,6 +28,16 @@ services:
       - api
     stdin_open: true
     tty: true
+  management-app:
+    build: ./management-app
+    volumes:
+      - ./management-app:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+    stdin_open: true
+    tty: true
 
 volumes:
   mysql_data:
