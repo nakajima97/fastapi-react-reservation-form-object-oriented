@@ -1,11 +1,14 @@
 from pydantic import BaseModel, Field, field_validator
 import datetime
 
+
 class Reservation(BaseModel):
     date: datetime.date = Field(..., title="Date of the reservation")
     name: str = Field(..., title="Name of the person making the reservation")
     email_address: str = Field(..., title="Email of the person making the reservation")
-    phone_number: str = Field(..., title="Phone number of the person making the reservation")
+    phone_number: str = Field(
+        ..., title="Phone number of the person making the reservation"
+    )
 
     model_config = {
         "json_schema_extra": {
@@ -20,12 +23,14 @@ class Reservation(BaseModel):
         }
     }
 
+
 class PostReservationRequest(Reservation):
     @field_validator("date")
     def validate_date(cls, value):
         if value < datetime.date.today():
             raise ValueError("Date must be in the future")
         return value
+
 
 class ResponseReservation(Reservation):
     id: int = Field(..., title="ID of the reservation")
@@ -44,6 +49,7 @@ class ResponseReservation(Reservation):
         }
     }
 
+
 class GetReservationResponse(BaseModel):
     reservations: list[ResponseReservation]
 
@@ -56,13 +62,13 @@ class GetReservationResponse(BaseModel):
                             "id": 1,
                             "date": "2024-04-13",
                             "name": "John Doe",
-                            "email_address": "example@example.com"
+                            "email_address": "example@example.com",
                         },
                         {
                             "id": 2,
                             "date": "2024-04-30",
                             "name": "Deborah Doe",
-                            "email_address": "example@example.com"
+                            "email_address": "example@example.com",
                         },
                     ]
                 }

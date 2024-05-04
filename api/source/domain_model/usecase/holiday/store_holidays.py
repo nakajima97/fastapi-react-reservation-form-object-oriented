@@ -1,7 +1,10 @@
-from source.domain_model.repository.sqlalchemy_calendar_repository import SqlAlchemyCalendarRepository
+from source.domain_model.repository.sqlalchemy_calendar_repository import (
+    SqlAlchemyCalendarRepository,
+)
 from source.domain_model.entity.calendar import Calendar
 
-class StoreHolidays():
+
+class StoreHolidays:
     def __init__(self, holiday_repository):
         self.holiday_repository = holiday_repository
 

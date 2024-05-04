@@ -5,7 +5,8 @@ from sqlalchemy.sql import select
 from source.models.reservations import Reservations as ReservationModel
 from source.domain_model.entity.reservation import Reservation
 
-class SqlAlchemyReservationRepository():
+
+class SqlAlchemyReservationRepository:
     def __init__(self, db: Session) -> None:
         self.db = db
 
