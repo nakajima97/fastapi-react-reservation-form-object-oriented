@@ -1,8 +1,5 @@
 from sqlalchemy import Column, Integer, Date, Boolean, DateTime
 from sqlalchemy.sql import func
-from zoneinfo import ZoneInfo
-
-import datetime
 
 from source.db import Base
 

@@ -9,7 +9,6 @@ import datetime
 
 from source.db import get_db, Base
 from source.main import app
-import source.models.calendars as calendars_model
 import source.models.reservations as reservations_model
 
 ASYNC_DB_URL = "sqlite+aiosqlite:///:memory:"
@@ -56,7 +55,6 @@ async def test_get_reservations_with_data(async_client):
     }
 
     async with async_session() as session:
-        date = datetime.date(2024, 1, 1)
         reservation = reservations_model.Reservations(
             date=datetime.datetime.strptime(base_json["date"], "%Y-%m-%d"),
             name=base_json["name"],

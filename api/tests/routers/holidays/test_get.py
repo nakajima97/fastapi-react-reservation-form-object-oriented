@@ -10,7 +10,6 @@ import datetime
 from source.db import get_db, Base
 from source.main import app
 import source.models.calendars as calendars_model
-import source.models.reservations as reservations_model
 
 ASYNC_DB_URL = "sqlite+aiosqlite:///:memory:"
 
