@@ -21,3 +21,4 @@
 ├── management-app    予約管理アプリ
 └── mysql             APIで利用するDB
 ```
+各ディレクトリ内の構造に関して各ディレクトリ内のREADMEを参照
