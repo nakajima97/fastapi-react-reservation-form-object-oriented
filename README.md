@@ -11,3 +11,13 @@
 # テストコードの実行
 ## api
 `docker compose run --entrypoint "poetry run pytest" api`
+
+# ディレクトリについて
+```
+.
+├── api               API（予約フォーム・予約管理アプリで共通）
+├── documents         このプロジェクトのドキュメント
+├── front             予約フォーム
+├── management-app    予約管理アプリ
+└── mysql             APIで利用するDB
+```
