@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AppBar,
   Toolbar,
@@ -10,19 +12,32 @@ import {
 } from "@mui/material";
 
 const ReservationIndexPage = () => {
-  const sideBarBarWidth = "240px";
+  const drawerWidth = "140px";
 
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="fixed">
+      <AppBar
+        position="fixed"
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
         <Toolbar>
           <Typography>予約一覧</Typography>
         </Toolbar>
       </AppBar>
-      <Box sx={{ flexShrink: 0, width: sideBarBarWidth, borderRight: "1px" }}>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: {
+            width: drawerWidth,
+            boxSizing: "border-box",
+          },
+        }}
+      >
         {/* 高さ確保用 */}
         <Toolbar />
-        <Box sx={{ overflow: "auto" }}>
+        <Box sx={{ overflow: "auto", width: "100%" }}>
           <List>
             <ListItem>
               <Button>予約一覧</Button>
@@ -32,7 +47,7 @@ const ReservationIndexPage = () => {
             </ListItem>
           </List>
         </Box>
-      </Box>
+      </Drawer>
       <Box sx={{ flexShrink: 1, p: 3 }}>
         {/* 高さ確保用 */}
         <Toolbar />
