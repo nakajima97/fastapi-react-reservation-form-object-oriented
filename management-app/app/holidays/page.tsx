@@ -1,7 +1,9 @@
+import HolidaysIndexPage from "@/features/holidays/ui/pages";
+
 const Page = () => {
   return (
     <>
-      <p>holidaysページです</p>
+      <HolidaysIndexPage />
     </>
   );
 };

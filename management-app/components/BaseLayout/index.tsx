@@ -10,6 +10,7 @@ import {
   ListItem,
   Button,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { FunctionComponent } from "react";
 
 type Props = {
@@ -18,6 +19,8 @@ type Props = {
 
 const BaseLayout: FunctionComponent<Props> = ({ children }) => {
   const drawerWidth = "140px";
+
+  const router = useRouter();
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -45,10 +48,14 @@ const BaseLayout: FunctionComponent<Props> = ({ children }) => {
         <Box sx={{ overflow: "auto", width: "100%" }}>
           <List>
             <ListItem>
-              <Button>予約一覧</Button>
+              <Button onClick={() => router.push("/reservations")}>
+                予約一覧
+              </Button>
             </ListItem>
             <ListItem>
-              <Button>営業日設定</Button>
+              <Button onClick={() => router.push("/holidays")}>
+                営業日設定
+              </Button>
             </ListItem>
           </List>
         </Box>
