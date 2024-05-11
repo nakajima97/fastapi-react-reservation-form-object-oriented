@@ -2,7 +2,11 @@
 
 import { Box, TextField, Typography, Button } from "@mui/material";
 
-const loginPage = () => {
+type Props = {
+  handleSubmit: () => void;
+};
+
+const loginPage = ({ handleSubmit }: Props) => {
   return (
     <Box
       sx={{
@@ -35,7 +39,12 @@ const loginPage = () => {
         type="password"
         autoFocus
       />
-      <Button type="submit" variant="contained" fullWidth>
+      <Button
+        type="submit"
+        variant="contained"
+        onClick={handleSubmit}
+        fullWidth
+      >
         ログイン
       </Button>
     </Box>
