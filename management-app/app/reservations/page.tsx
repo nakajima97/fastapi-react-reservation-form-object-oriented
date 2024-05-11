@@ -1,7 +1,9 @@
+import ReservationIndexPage from "@/features/reservations/ui/pages";
+
 const Page = () => {
   return (
     <>
-      <p>reservationsページです</p>
+      <ReservationIndexPage />
     </>
   );
 };
