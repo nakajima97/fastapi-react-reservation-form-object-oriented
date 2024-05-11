@@ -1,3 +1,9 @@
+import LoginPage from "@/features/login/pages/loginPage";
+
 export default function Home() {
-  return <main>Hello, world!</main>;
+  return (
+    <main>
+      <LoginPage />
+    </main>
+  );
 }
