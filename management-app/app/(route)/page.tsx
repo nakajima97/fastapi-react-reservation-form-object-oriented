@@ -1,6 +1,6 @@
 "use client";
 
-import LoginPage from "@/features/login/pages/loginPage";
+import LoginPage from "@/features/login/ui/pages/loginPage";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
