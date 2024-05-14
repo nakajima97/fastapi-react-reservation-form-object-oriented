@@ -1,4 +1,4 @@
-import HolidaysIndexPage from "@/features/holidays/ui/pages";
+import HolidaysIndexPage from "@/features/holidays/components/page/index";
 
 const Page = () => {
   return (

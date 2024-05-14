@@ -1,4 +1,4 @@
-import ReservationIndexPage from "@/features/reservations/ui/pages";
+import ReservationIndexPage from "@/features/reservations/components/page";
 
 const Page = () => {
   return (
