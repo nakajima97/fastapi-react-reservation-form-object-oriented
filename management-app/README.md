@@ -5,15 +5,17 @@
 │   ├── (route)
 │   ├── holidays
 │   └── reservations
-├── feature
-│   └── login
-│       └── pages
-├── node_modules
+├── components
+│   └── BaseLayout
+├── features
+│   ├── holidays
+│   │   └── components
+│   ├── login
+│   │   └── components
+│   └── reservations
+│       └── components
 └── public
 ```
 
-以下サイトを参考にしている
-- https://tech.anotherworks.co.jp/article/react-typescript-architecture
-
 ディレクトリ構成は以下コマンドで出力
-`tree -dL 3 --filelimit 10`
+`tree -dL 3 -I node_modules/`
