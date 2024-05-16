@@ -3,6 +3,7 @@
 `docker compose build`  
 `docker compose run --entrypoint "poetry install --no-root" api`  
 `docker compose run --entrypoint "yarn install" front`  
+`docker compose run --entrypoint "yarn install" management-app`  
 `docker compose up`  
 
 マイグレーションの実行  
