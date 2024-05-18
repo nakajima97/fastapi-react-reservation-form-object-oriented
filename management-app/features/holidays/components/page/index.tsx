@@ -30,7 +30,6 @@ const HolidaysIndexPage = () => {
   return (
     <BaseLayout title="営業日設定">
       <>
-        <Typography>営業日設定</Typography>
         <Box>
           <TableContainer>
             <TableHead>
