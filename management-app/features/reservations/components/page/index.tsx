@@ -13,13 +13,7 @@ import BaseLayout from "@/components/BaseLayout";
 
 import useReservationRepository from "../../hooks/useReservationRepository";
 import { useEffect, useState } from "react";
-
-type ReservationType = {
-  date: string;
-  name: string;
-  emailAddress: string;
-  phoneNumber: string;
-};
+import { ReservationType } from "../../types";
 
 const ReservationIndexPage = () => {
   const [reservations, setReservations] = useState<ReservationType[]>([]);
