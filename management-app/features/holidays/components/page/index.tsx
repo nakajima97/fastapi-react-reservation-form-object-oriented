@@ -2,8 +2,7 @@ import BaseLayout from "@/components/BaseLayout";
 import {
   Typography,
   Box,
-  List,
-  ListItem,
+  Table,
   TableContainer,
   TableHead,
   TableRow,
@@ -32,28 +31,32 @@ const HolidaysIndexPage = () => {
       <>
         <Box>
           <TableContainer>
-            <TableHead>
-              <TableRow>
-                <TableCell>日付</TableCell>
-                <TableCell>形態</TableCell>
-                <TableCell>設定</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {monthDates.map((date) => (
-                <TableRow key={date.date.toLocaleDateString()}>
-                  <TableCell>
-                    <Typography>
-                      {date.date.getMonth() + 1}月{date.date.getDate()}日
-                    </Typography>
-                  </TableCell>
-                  <TableCell>{date.isHoliday ? "休業日" : "営業日"}</TableCell>
-                  <TableCell>
-                    <Button type="button">設定</Button>
-                  </TableCell>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>日付</TableCell>
+                  <TableCell>形態</TableCell>
+                  <TableCell>設定</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
+              </TableHead>
+              <TableBody>
+                {monthDates.map((date) => (
+                  <TableRow key={date.date.toLocaleDateString()}>
+                    <TableCell>
+                      <Typography>
+                        {date.date.getMonth() + 1}月{date.date.getDate()}日
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {date.isHoliday ? "休業日" : "営業日"}
+                    </TableCell>
+                    <TableCell>
+                      <Button type="button">設定</Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </TableContainer>
         </Box>
       </>
