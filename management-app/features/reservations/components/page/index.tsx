@@ -25,7 +25,6 @@ const ReservationIndexPage = () => {
     (async () => {
       const data = await fetchReservations();
       setReservations(data);
-      return data;
     })();
   }, []);
 
