@@ -34,6 +34,7 @@ services:
       - ./management-app:/app
     ports:
       - 3000:3000
+      - 6006:6006
     depends_on:
       - api
     stdin_open: true
