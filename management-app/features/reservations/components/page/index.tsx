@@ -40,9 +40,8 @@ const ReservationIndexPage = () => {
   ];
 
   return (
-    <BaseLayout>
+    <BaseLayout title="予約一覧">
       <>
-        <Typography>予約一覧</Typography>
         <Box>
           <TableContainer>
             <Table>

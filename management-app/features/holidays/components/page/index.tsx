@@ -28,9 +28,8 @@ const HolidaysIndexPage = () => {
   const monthDates = createMonthDates();
 
   return (
-    <BaseLayout>
+    <BaseLayout title="営業日設定">
       <>
-        <Typography>営業日設定</Typography>
         <Box>
           <TableContainer>
             <TableHead>

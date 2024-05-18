@@ -15,9 +15,10 @@ import { FunctionComponent } from "react";
 
 type Props = {
   children: React.ReactElement;
+  title: string;
 };
 
-const BaseLayout: FunctionComponent<Props> = ({ children }) => {
+const BaseLayout: FunctionComponent<Props> = ({ children, title }) => {
   const drawerWidth = "140px";
 
   const router = useRouter();
@@ -29,7 +30,7 @@ const BaseLayout: FunctionComponent<Props> = ({ children }) => {
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
-          <Typography>予約一覧</Typography>
+          <Typography>{title}</Typography>
         </Toolbar>
       </AppBar>
       <Drawer
