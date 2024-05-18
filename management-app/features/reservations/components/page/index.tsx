@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Table,
@@ -6,38 +8,25 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  Typography,
 } from "@mui/material";
 import BaseLayout from "@/components/BaseLayout";
 
-type ReservationType = {
-  reservationDate: string;
-  name: string;
-  email: string;
-  phoneNumber: string;
-};
+import useReservationRepository from "../../hooks/useReservationRepository";
+import { useEffect, useState } from "react";
+import { ReservationType } from "../../types";
 
 const ReservationIndexPage = () => {
-  const reservationData: ReservationType[] = [
-    {
-      reservationDate: "2024-10-01",
-      name: "テスト太郎",
-      email: "example@example.com",
-      phoneNumber: "090-1234-5678",
-    },
-    {
-      reservationDate: "2024-10-05",
-      name: "テスト太郎2",
-      email: "example2@example.com",
-      phoneNumber: "090-1234-5678",
-    },
-    {
-      reservationDate: "2024-10-10",
-      name: "テスト太郎2",
-      email: "example3@example.com",
-      phoneNumber: "090-1234-5678",
-    },
-  ];
+  const [reservations, setReservations] = useState<ReservationType[]>([]);
+
+  const { fetchReservations } = useReservationRepository();
+  fetchReservations();
+
+  useEffect(() => {
+    (async () => {
+      const data = await fetchReservations();
+      setReservations(data);
+    })();
+  }, []);
 
   return (
     <BaseLayout title="予約一覧">
@@ -54,11 +43,11 @@ const ReservationIndexPage = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {reservationData.map((reservation) => (
-                  <TableRow key={reservation.reservationDate}>
-                    <TableCell>{reservation.reservationDate}</TableCell>
+                {reservations.map((reservation) => (
+                  <TableRow key={reservation.date}>
+                    <TableCell>{reservation.date}</TableCell>
                     <TableCell>{reservation.name}</TableCell>
-                    <TableCell>{reservation.email}</TableCell>
+                    <TableCell>{reservation.emailAddress}</TableCell>
                     <TableCell>{reservation.phoneNumber}</TableCell>
                   </TableRow>
                 ))}
