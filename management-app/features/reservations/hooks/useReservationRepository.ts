@@ -1,12 +1,11 @@
 import camelcaseKeys from "camelcase-keys";
 
 import { ReservationType } from "../types";
+import { fetchData } from "../../../utils/fetch";
 
 const useReservationRepository = () => {
   const fetchReservations = async (): Promise<ReservationType[]> => {
-    const response = await fetch("http://localhost:8000/reservations");
-    const data = await response.json();
-    return camelcaseKeys(data.reservations);
+    return fetchData("http://localhost:8000/reservations")
   };
 
   return {
