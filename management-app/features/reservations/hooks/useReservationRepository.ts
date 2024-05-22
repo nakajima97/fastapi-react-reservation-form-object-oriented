@@ -1,5 +1,3 @@
-import camelcaseKeys from "camelcase-keys";
-
 import { ReservationType } from "../types";
 import { fetchData } from "../../../utils/fetch";
 
