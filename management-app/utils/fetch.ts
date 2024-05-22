@@ -9,8 +9,6 @@ const fetchData = async (url: string) => {
 
   const data = await response.json();
   return camelcaseKeys(data.reservations);
-}
+};
 
-export {
-  fetchData
-}
+export { fetchData };
