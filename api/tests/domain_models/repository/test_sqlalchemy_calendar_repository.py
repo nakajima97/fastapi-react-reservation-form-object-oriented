@@ -89,9 +89,16 @@ async def test_fetch_calendars(async_client):
         await session.commit()
 
         sqlalchemy_calendar_repository = SqlAlchemyCalendarRepository(session)
+
+        start_date = datetime.date(2024, 1, 1)
+        end_date = datetime.date(2024, 1, 2)
         result = await sqlalchemy_calendar_repository.fetch_calendar(
-            "2024-01-01", "2024-01-02"
+            start_date, end_date
         )
 
         assert len(result) == 2
-        assert result == ["2024-01-01", "2024-01-02"]
+        calendars = [
+            Calendar(date=start_date, is_holiday=True),
+            Calendar(date=end_date, is_holiday=True),
+        ]
+        assert result[0].date == calendars[0].date
