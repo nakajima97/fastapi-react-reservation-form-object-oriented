@@ -1,6 +1,7 @@
 from typing import List
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import select
+from datetime import datetime
 
 from source.models.calendars import Calendars as CalendarsModel
 from source.domain_model.entity.calendar import Calendar
@@ -43,7 +44,9 @@ class SqlAlchemyCalendarRepository:
 
         return holidays
 
-    async def fetch_calendar(self, start_date: str, end_date: str) -> List[Calendar]:
+    async def fetch_calendar(self, start_date_datetime: datetime, end_date_datetime: datetime) -> List[Calendar]:
+        start_date = start_date_datetime.strftime("%Y-%m-%d")
+        end_date = end_date_datetime.strftime("%Y-%m-%d")
         results = await self.db.execute(
             select(CalendarsModel).where(
                 CalendarsModel.date.between(start_date, end_date)
@@ -52,6 +55,6 @@ class SqlAlchemyCalendarRepository:
 
         calendars = []
         for row in results.fetchall():
-            calendars.append(self.__model_to_entity(row[0]).date.strftime("%Y-%m-%d"))
+            calendars.append(self.__model_to_entity(row[0]))
 
         return calendars
