@@ -42,3 +42,16 @@ class SqlAlchemyCalendarRepository:
             holidays.append(self.__model_to_entity(row[0]).date.strftime("%Y-%m-%d"))
 
         return holidays
+
+    async def fetch_calendar(self, start_date: str, end_date: str) -> List[Calendar]:
+        results = await self.db.execute(
+            select(CalendarsModel).where(
+                CalendarsModel.date.between(start_date, end_date)
+            )
+        )
+
+        calendars = []
+        for row in results.fetchall():
+            calendars.append(self.__model_to_entity(row[0]).date.strftime("%Y-%m-%d"))
+
+        return calendars
