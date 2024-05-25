@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from source.db import get_db
 from datetime import datetime
 
-from source.schemas.calendars import CreateCalendarsRequest, GetCalendarResponse
+from source.schemas.calendars import CreateCalendarsRequest
 from source.domain_model.repository.sqlalchemy_calendar_repository import (
     SqlAlchemyCalendarRepository,
 )

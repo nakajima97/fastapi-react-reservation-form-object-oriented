@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from source.domain_model.entity.calendar import Calendar
 from source.domain_model.repository.sqlalchemy_calendar_repository import (
     SqlAlchemyCalendarRepository,
 )
