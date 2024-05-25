@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 import datetime
 
+
 class CreateCalendarsRequest(BaseModel):
     start_date: datetime.date = Field(..., title="Start date of the holiday")
     end_date: datetime.date = Field(..., title="End date of the holiday")
