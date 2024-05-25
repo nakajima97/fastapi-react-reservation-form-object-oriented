@@ -44,7 +44,7 @@ const ReservationIndexPage = () => {
               </TableHead>
               <TableBody>
                 {reservations.map((reservation) => (
-                  <TableRow key={reservation.date}>
+                  <TableRow key={reservation.id}>
                     <TableCell>{reservation.date}</TableCell>
                     <TableCell>{reservation.name}</TableCell>
                     <TableCell>{reservation.emailAddress}</TableCell>

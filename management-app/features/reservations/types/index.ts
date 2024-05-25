@@ -1,4 +1,5 @@
 type ReservationType = {
+  id: number;
   date: string;
   name: string;
   emailAddress: string;
