@@ -71,3 +71,34 @@ async def test_fetch_holidays(async_client):
 
         assert len(result) == 1
         assert result == ["2024-01-01"]
+
+
+@pytest.mark.asyncio
+async def test_fetch_calendars(async_client):
+    async with async_session() as session:
+        # データベースにテストデータを追加
+        date1 = datetime.date(2024, 1, 1)
+        date2 = datetime.date(2024, 1, 2)
+        date3 = datetime.date(2024, 1, 3)
+        calendar_model1 = CalendarModel(date=date1, is_holiday=True)
+        session.add(calendar_model1)
+        calendar_model2 = CalendarModel(date=date2, is_holiday=False)
+        session.add(calendar_model2)
+        calendar_model3 = CalendarModel(date=date3, is_holiday=False)
+        session.add(calendar_model3)
+        await session.commit()
+
+        sqlalchemy_calendar_repository = SqlAlchemyCalendarRepository(session)
+
+        start_date = datetime.date(2024, 1, 1)
+        end_date = datetime.date(2024, 1, 2)
+        result = await sqlalchemy_calendar_repository.fetch_calendar(
+            start_date, end_date
+        )
+
+        assert len(result) == 2
+        calendars = [
+            Calendar(date=start_date, is_holiday=True),
+            Calendar(date=end_date, is_holiday=True),
+        ]
+        assert result[0].date == calendars[0].date
