@@ -12,6 +12,7 @@ class CreateCalendarsRequest(BaseModel):
         }
     }
 
+
 class GetCalendarResponse(BaseModel):
     date: datetime.date = Field(..., title="Date of the holiday")
     is_holiday: bool = Field(..., title="Is holiday or not")

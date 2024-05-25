@@ -44,7 +44,9 @@ class SqlAlchemyCalendarRepository:
 
         return holidays
 
-    async def fetch_calendar(self, start_date_datetime: datetime, end_date_datetime: datetime) -> List[Calendar]:
+    async def fetch_calendar(
+        self, start_date_datetime: datetime, end_date_datetime: datetime
+    ) -> List[Calendar]:
         start_date = start_date_datetime.strftime("%Y-%m-%d")
         end_date = end_date_datetime.strftime("%Y-%m-%d")
         results = await self.db.execute(

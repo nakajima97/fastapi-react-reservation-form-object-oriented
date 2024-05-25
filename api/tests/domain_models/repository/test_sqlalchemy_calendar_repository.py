@@ -72,6 +72,7 @@ async def test_fetch_holidays(async_client):
         assert len(result) == 1
         assert result == ["2024-01-01"]
 
+
 @pytest.mark.asyncio
 async def test_fetch_calendars(async_client):
     async with async_session() as session:
