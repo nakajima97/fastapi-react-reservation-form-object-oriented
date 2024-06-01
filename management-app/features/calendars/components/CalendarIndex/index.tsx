@@ -21,6 +21,7 @@ import { useState } from "react";
 import SettingModal from "../SettingModal";
 import AddCalendarDataDialog from "../AddCalendarDataDialog";
 import CalendarTable from "../CalendarTable";
+import SelectYearMonth from "../SelectYearMonth";
 
 const CalendarIndex = () => {
   // 1ヶ月分の日付データを作成する
@@ -37,34 +38,14 @@ const CalendarIndex = () => {
   };
   const monthDates = createMonthDates();
 
-  // 1~12の数値の配列を作成する
-  const createNumbers = (start: number, end: number) => {
-    const numbers = [];
-    for (let i = start; i <= end; i++) {
-      numbers.push(i);
-    }
-    return numbers;
-  };
-  const months = createNumbers(1, 12);
-  const years = createNumbers(2020, 2030);
-
   const [open, setOpen] = useState(false);
   const [isHoliday, setIsHoliday] = useState<boolean>(false);
-  const [selectedMonth, setSelectedMonth] = useState<number>(1);
-  const [selectedYear, setSelectedYear] = useState<number>(2024);
+
   const [isOpenedAddCalendarDialog, setIsOpenedAddCalendarDialog] =
     useState<boolean>(false);
 
   const handleChange = (event: SelectChangeEvent) => {
     setIsHoliday(stringToIsHoliday(event.target.value));
-  };
-
-  const handleChangeMonth = (event: SelectChangeEvent) => {
-    setSelectedMonth(+event.target.value);
-  };
-
-  const handleChangeYear = (event: SelectChangeEvent) => {
-    setSelectedYear(+event.target.value);
   };
 
   const isHolidayToString = (isHoliday: boolean) => {
@@ -85,23 +66,7 @@ const CalendarIndex = () => {
           日付データ追加
         </Button>
       </Box>
-      <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-        <Select value={selectedYear.toString()} onChange={handleChangeYear}>
-          {years.map((year) => (
-            <MenuItem key={year} value={year}>
-              {year}年
-            </MenuItem>
-          ))}
-        </Select>
-        <Select value={selectedMonth.toString()} onChange={handleChangeMonth}>
-          {months.map((month) => (
-            <MenuItem key={month} value={month}>
-              {month}月
-            </MenuItem>
-          ))}
-        </Select>
-        <Button variant="contained">のカレンダーを表示する</Button>
-      </Box>
+      <SelectYearMonth />
       <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
         <Typography>選択した日付を</Typography>
         <Select value={isHolidayToString(isHoliday)} onChange={handleChange}>
