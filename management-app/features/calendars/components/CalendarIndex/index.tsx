@@ -1,3 +1,5 @@
+"use client";
+
 import BaseLayout from "@/components/BaseLayout";
 import {
   Typography,
@@ -10,6 +12,9 @@ import {
   TableBody,
   Button,
 } from "@mui/material";
+
+import { useState } from "react";
+import SettingModal from "../SettingModal";
 
 const CalendarIndex = () => {
   // 1ヶ月分の日付データを作成する
@@ -25,6 +30,8 @@ const CalendarIndex = () => {
     return dates;
   };
   const monthDates = createMonthDates();
+
+  const [open, setOpen] = useState(false);
 
   return (
     <BaseLayout title="営業日設定">
@@ -61,7 +68,9 @@ const CalendarIndex = () => {
                       {date.isHoliday ? "休業日" : "営業日"}
                     </TableCell>
                     <TableCell>
-                      <Button type="button">設定</Button>
+                      <Button type="button" onClick={() => setOpen(true)}>
+                        設定
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -69,6 +78,7 @@ const CalendarIndex = () => {
             </Table>
           </TableContainer>
         </Box>
+        <SettingModal open={open} onClose={() => setOpen(false)} />
       </>
     </BaseLayout>
   );
