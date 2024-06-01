@@ -1,20 +1,6 @@
 "use client";
 
-import BaseLayout from "@/components/BaseLayout";
-import {
-  Typography,
-  Box,
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Button,
-  Checkbox,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { Typography, Box, Button, Select, MenuItem } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material/Select";
 
 import { useState } from "react";
