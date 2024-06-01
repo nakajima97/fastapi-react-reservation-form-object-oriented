@@ -35,6 +35,7 @@ const CalendarIndex = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>日付</TableCell>
+                  <TableCell>曜日</TableCell>
                   <TableCell>形態</TableCell>
                   <TableCell>設定</TableCell>
                 </TableRow>
@@ -45,6 +46,15 @@ const CalendarIndex = () => {
                     <TableCell>
                       <Typography>
                         {date.date.getMonth() + 1}月{date.date.getDate()}日
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>
+                        {
+                          ["日", "月", "火", "水", "木", "金", "土"][
+                            date.date.getDay()
+                          ]
+                        }
                       </Typography>
                     </TableCell>
                     <TableCell>
