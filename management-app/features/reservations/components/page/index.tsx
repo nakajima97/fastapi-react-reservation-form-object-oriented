@@ -29,34 +29,32 @@ const ReservationIndexPage = () => {
   }, []);
 
   return (
-    <BaseLayout title="予約一覧">
-      <>
-        <Box>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>予約希望日</TableCell>
-                  <TableCell>名前</TableCell>
-                  <TableCell>メールアドレス</TableCell>
-                  <TableCell>電話番号</TableCell>
+    <>
+      <Box>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>予約希望日</TableCell>
+                <TableCell>名前</TableCell>
+                <TableCell>メールアドレス</TableCell>
+                <TableCell>電話番号</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {reservations.map((reservation) => (
+                <TableRow key={reservation.id}>
+                  <TableCell>{reservation.date}</TableCell>
+                  <TableCell>{reservation.name}</TableCell>
+                  <TableCell>{reservation.emailAddress}</TableCell>
+                  <TableCell>{reservation.phoneNumber}</TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {reservations.map((reservation) => (
-                  <TableRow key={reservation.id}>
-                    <TableCell>{reservation.date}</TableCell>
-                    <TableCell>{reservation.name}</TableCell>
-                    <TableCell>{reservation.emailAddress}</TableCell>
-                    <TableCell>{reservation.phoneNumber}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-      </>
-    </BaseLayout>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    </>
   );
 };
 
