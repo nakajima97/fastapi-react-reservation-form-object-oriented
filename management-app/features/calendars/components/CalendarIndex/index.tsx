@@ -35,11 +35,26 @@ const CalendarIndex = () => {
   };
   const monthDates = createMonthDates();
 
+  // 1~12の数値の配列を作成する
+  const createNumbers = (start: number, end: number) => {
+    const numbers = [];
+    for (let i = start; i <= end; i++) {
+      numbers.push(i);
+    }
+    return numbers;
+  };
+  const months = createNumbers(1, 12);
+
   const [open, setOpen] = useState(false);
   const [isHoliday, setIsHoliday] = useState<boolean>(false);
+  const [selectedMonth, setSelectedMonth] = useState<number>(1);
 
   const handleChange = (event: SelectChangeEvent) => {
     setIsHoliday(stringToIsHoliday(event.target.value));
+  };
+
+  const handleChangeMonth = (event: SelectChangeEvent) => {
+    setSelectedMonth(+event.target.value);
   };
 
   const isHolidayToString = (isHoliday: boolean) => {
@@ -52,7 +67,8 @@ const CalendarIndex = () => {
 
   return (
     <>
-      <Box sx={{ display: "flex", gap: "10px" }}>
+      <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
+        <Typography>選択した日付を</Typography>
         <Select value={isHolidayToString(isHoliday)} onChange={handleChange}>
           <MenuItem value="0">営業日に設定する</MenuItem>
           <MenuItem value="1">休日に設定する</MenuItem>
