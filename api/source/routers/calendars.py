@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from source.db import get_db
 from datetime import datetime
 
-from source.schemas.calendars import CreateCalendarsRequest
+from source.schemas.calendars import CreateCalendarsRequest, GetCalendarResponse
 from source.domain_model.repository.sqlalchemy_calendar_repository import (
     SqlAlchemyCalendarRepository,
 )
@@ -41,4 +41,4 @@ async def fetch_calendar(start_date: str, end_date: str, db=Depends(get_db)):
         datetime.strptime(end_date, parameter_date_format),
     )
 
-    return calendars
+    return {"calendars": calendars}

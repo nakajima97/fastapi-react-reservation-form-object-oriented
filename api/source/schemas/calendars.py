@@ -14,11 +14,12 @@ class CreateCalendarsRequest(BaseModel):
 
 
 class GetCalendarResponse(BaseModel):
+    id: int = Field(..., title="ID")
     date: datetime.date = Field(..., title="Date of the holiday")
     is_holiday: bool = Field(..., title="Is holiday or not")
 
     model_config = {
         "json_schema_extra": {
-            "examples": [[{"date": "2024-05-01", "is_holiday": True}]]
+            "examples": [{"calendars": [{"id": 1, "date": "2024-05-01", "is_holiday": True}, {"id": 2, "date": "2024-05-02", "is_holiday": False}]}]
         }
     }
