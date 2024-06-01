@@ -11,7 +11,11 @@ import {
   TableCell,
   TableBody,
   Button,
+  Checkbox,
+  Select,
+  MenuItem,
 } from "@mui/material";
+import { SelectChangeEvent } from "@mui/material/Select";
 
 import { useState } from "react";
 import SettingModal from "../SettingModal";
@@ -32,15 +36,37 @@ const CalendarIndex = () => {
   const monthDates = createMonthDates();
 
   const [open, setOpen] = useState(false);
+  const [isHoliday, setIsHoliday] = useState<boolean>(false);
+  const [bar, setBar] = useState<string>("");
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setIsHoliday(stringToIsHoliday(event.target.value));
+  };
+
+  const isHolidayToString = (isHoliday: boolean) => {
+    return isHoliday ? "1" : "0";
+  };
+
+  const stringToIsHoliday = (str: string) => {
+    return str === "1" ? true : false;
+  };
 
   return (
     <BaseLayout title="営業日設定">
       <>
         <Box>
+          <Select value={isHolidayToString(isHoliday)} onChange={handleChange}>
+            <MenuItem value="0">営業日に設定する</MenuItem>
+            <MenuItem value="1">休日に設定する</MenuItem>
+          </Select>
+          <Button>実行</Button>
+        </Box>
+        <Box>
           <TableContainer>
             <Table>
               <TableHead>
                 <TableRow>
+                  <TableCell>一括選択</TableCell>
                   <TableCell>日付</TableCell>
                   <TableCell>曜日</TableCell>
                   <TableCell>形態</TableCell>
@@ -50,6 +76,9 @@ const CalendarIndex = () => {
               <TableBody>
                 {monthDates.map((date) => (
                   <TableRow key={date.date.toLocaleDateString()}>
+                    <TableCell>
+                      <Checkbox />
+                    </TableCell>
                     <TableCell>
                       <Typography>
                         {date.date.getMonth() + 1}月{date.date.getDate()}日
