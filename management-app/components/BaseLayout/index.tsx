@@ -54,7 +54,7 @@ const BaseLayout: FunctionComponent<Props> = ({ children, title }) => {
               </Button>
             </ListItem>
             <ListItem>
-              <Button onClick={() => router.push("/holidays")}>
+              <Button onClick={() => router.push("/calendars")}>
                 営業日設定
               </Button>
             </ListItem>
