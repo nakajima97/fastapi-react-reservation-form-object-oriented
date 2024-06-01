@@ -30,7 +30,7 @@ async def create_calendar(
     return {"message": "Create calendar"}
 
 
-@router.get("/calendars")
+@router.get("/calendars", response_model=GetCalendarResponse)
 async def fetch_calendar(start_date: str, end_date: str, db=Depends(get_db)):
     calendar_repository = SqlAlchemyCalendarRepository(db)
     fetch_calendars_by_date = FetchCalendarsByDate(calendar_repository)
