@@ -1,9 +1,9 @@
-import HolidaysIndexPage from "@/features/holidays/components/page/index";
+import CalendarIndex from "@/features/calendars/components/CalendarIndex/index";
 
 const Page = () => {
   return (
     <>
-      <HolidaysIndexPage />
+      <CalendarIndex />
     </>
   );
 };

@@ -11,7 +11,7 @@ import {
   Button,
 } from "@mui/material";
 
-const HolidaysIndexPage = () => {
+const CalendarIndex = () => {
   // 1ヶ月分の日付データを作成する
   const createMonthDates = () => {
     const dates = [];
@@ -64,4 +64,4 @@ const HolidaysIndexPage = () => {
   );
 };
 
-export default HolidaysIndexPage;
+export default CalendarIndex;
