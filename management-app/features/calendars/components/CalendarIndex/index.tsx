@@ -19,6 +19,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 
 import { useState } from "react";
 import SettingModal from "../SettingModal";
+import AddCalendarDataDialog from "../AddCalendarDataDialog";
 
 const CalendarIndex = () => {
   // 1ヶ月分の日付データを作成する
@@ -50,6 +51,8 @@ const CalendarIndex = () => {
   const [isHoliday, setIsHoliday] = useState<boolean>(false);
   const [selectedMonth, setSelectedMonth] = useState<number>(1);
   const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const [isOpenedAddCalendarDialog, setIsOpenedAddCalendarDialog] =
+    useState<boolean>(false);
 
   const handleChange = (event: SelectChangeEvent) => {
     setIsHoliday(stringToIsHoliday(event.target.value));
@@ -73,6 +76,14 @@ const CalendarIndex = () => {
 
   return (
     <>
+      <Box>
+        <Button
+          onClick={() => setIsOpenedAddCalendarDialog(true)}
+          variant="contained"
+        >
+          日付データ追加
+        </Button>
+      </Box>
       <Box sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
         <Select value={selectedYear.toString()} onChange={handleChangeYear}>
           {years.map((year) => (
@@ -143,6 +154,10 @@ const CalendarIndex = () => {
         </TableContainer>
       </Box>
       <SettingModal open={open} onClose={() => setOpen(false)} />
+      <AddCalendarDataDialog
+        open={isOpenedAddCalendarDialog}
+        onClose={() => setIsOpenedAddCalendarDialog(false)}
+      />
     </>
   );
 };
