@@ -37,7 +37,6 @@ const CalendarIndex = () => {
 
   const [open, setOpen] = useState(false);
   const [isHoliday, setIsHoliday] = useState<boolean>(false);
-  const [bar, setBar] = useState<string>("");
 
   const handleChange = (event: SelectChangeEvent) => {
     setIsHoliday(stringToIsHoliday(event.target.value));
