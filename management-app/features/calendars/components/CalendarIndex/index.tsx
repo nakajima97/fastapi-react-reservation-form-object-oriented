@@ -53,12 +53,12 @@ const CalendarIndex = () => {
   return (
     <BaseLayout title="営業日設定">
       <>
-        <Box>
+        <Box sx={{ display: "flex", gap: "10px" }}>
           <Select value={isHolidayToString(isHoliday)} onChange={handleChange}>
             <MenuItem value="0">営業日に設定する</MenuItem>
             <MenuItem value="1">休日に設定する</MenuItem>
           </Select>
-          <Button>実行</Button>
+          <Button variant="contained">実行</Button>
         </Box>
         <Box>
           <TableContainer>
