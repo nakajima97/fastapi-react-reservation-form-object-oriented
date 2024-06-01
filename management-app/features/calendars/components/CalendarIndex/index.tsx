@@ -51,64 +51,60 @@ const CalendarIndex = () => {
   };
 
   return (
-    <BaseLayout title="営業日設定">
-      <>
-        <Box sx={{ display: "flex", gap: "10px" }}>
-          <Select value={isHolidayToString(isHoliday)} onChange={handleChange}>
-            <MenuItem value="0">営業日に設定する</MenuItem>
-            <MenuItem value="1">休日に設定する</MenuItem>
-          </Select>
-          <Button variant="contained">実行</Button>
-        </Box>
-        <Box>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>一括選択</TableCell>
-                  <TableCell>日付</TableCell>
-                  <TableCell>曜日</TableCell>
-                  <TableCell>形態</TableCell>
-                  <TableCell>設定</TableCell>
+    <>
+      <Box sx={{ display: "flex", gap: "10px" }}>
+        <Select value={isHolidayToString(isHoliday)} onChange={handleChange}>
+          <MenuItem value="0">営業日に設定する</MenuItem>
+          <MenuItem value="1">休日に設定する</MenuItem>
+        </Select>
+        <Button variant="contained">実行</Button>
+      </Box>
+      <Box>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>一括選択</TableCell>
+                <TableCell>日付</TableCell>
+                <TableCell>曜日</TableCell>
+                <TableCell>形態</TableCell>
+                <TableCell>設定</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {monthDates.map((date) => (
+                <TableRow key={date.date.toLocaleDateString()}>
+                  <TableCell>
+                    <Checkbox />
+                  </TableCell>
+                  <TableCell>
+                    <Typography>
+                      {date.date.getMonth() + 1}月{date.date.getDate()}日
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography>
+                      {
+                        ["日", "月", "火", "水", "木", "金", "土"][
+                          date.date.getDay()
+                        ]
+                      }
+                    </Typography>
+                  </TableCell>
+                  <TableCell>{date.isHoliday ? "休業日" : "営業日"}</TableCell>
+                  <TableCell>
+                    <Button type="button" onClick={() => setOpen(true)}>
+                      設定
+                    </Button>
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {monthDates.map((date) => (
-                  <TableRow key={date.date.toLocaleDateString()}>
-                    <TableCell>
-                      <Checkbox />
-                    </TableCell>
-                    <TableCell>
-                      <Typography>
-                        {date.date.getMonth() + 1}月{date.date.getDate()}日
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>
-                        {
-                          ["日", "月", "火", "水", "木", "金", "土"][
-                            date.date.getDay()
-                          ]
-                        }
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      {date.isHoliday ? "休業日" : "営業日"}
-                    </TableCell>
-                    <TableCell>
-                      <Button type="button" onClick={() => setOpen(true)}>
-                        設定
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-        <SettingModal open={open} onClose={() => setOpen(false)} />
-      </>
-    </BaseLayout>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+      <SettingModal open={open} onClose={() => setOpen(false)} />
+    </>
   );
 };
 
